@@ -1,6 +1,6 @@
 define(function() {
   return {
-    endpoint: 'http://pandordio.herokuapp.com'
+    endpoint: 'https://pandordio.herokuapp.com'
     //endpoint: 'http://localhost:5000'
   };
 });
