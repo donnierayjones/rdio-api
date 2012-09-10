@@ -16,7 +16,18 @@ define(['config', 'http-helper'], function(Config, HttpHelper) {
 
     this.execute = function(method, args, callback) {
       httpHelper.post(method, args, function(data) {
-        callback(data[1].result);
+        if(data[1].status !== 'ok') {
+          callback({
+            status: data[1].status,
+            message: data[1].message
+          });
+        } else {
+          callback({
+            error: data[0],
+            status: data[1].status,
+            result: data[1].result
+          });
+        }
       });
     };
   };
