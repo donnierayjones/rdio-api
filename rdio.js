@@ -30,6 +30,36 @@ define(['rdio-api-proxy'], function(RdioApiProxy) {
           callback(data);
         });
     };
+
+    this.getPlaylists = function(callback) {
+      _proxy.execute(
+        'getPlaylists',
+        null,
+        function(data) {
+          callback(data);
+        });
+    };
+
+    this.createPlaylist = function(opt, callback) {
+      _proxy.execute(
+        'createPlaylist',
+        opt,
+        function(data) {
+          callback(data);
+        });
+    };
+
+    this.addToPlaylist = function(playlistKey, trackKeys, callback) {
+      _proxy.execute(
+        'addToPlaylist',
+        {
+          playlist: playlistKey,
+          tracks: trackKeys
+        },
+        function(data) {
+          callback(data);
+        });
+    };
   };
 
   return Rdio;
