@@ -1,6 +1,17 @@
 define(['rdio-api-proxy'], function(RdioApiProxy) {
   var _proxy;
 
+  var isFunction = function(functionToCheck) {
+    var getType = {};
+    return functionToCheck && getType.toString.call(functionToCheck) == '[object Function]';
+  };
+
+  var handleCallback = function(callback, data) {
+    if(isFunction(callback)) {
+      callback(data);
+    }
+  };
+
   var Rdio = function(rdioApiProxy) {
     _proxy = rdioApiProxy || new RdioApiProxy();
 
@@ -9,7 +20,7 @@ define(['rdio-api-proxy'], function(RdioApiProxy) {
         'search',
         { query: query, types: types },
         function(data) {
-          callback(data);
+          handleCallback(callback, data);
         });
     };
 
@@ -18,7 +29,7 @@ define(['rdio-api-proxy'], function(RdioApiProxy) {
         'addToCollection',
         { keys: keys },
         function(data) {
-          callback(data);
+          handleCallback(callback, data);
         });
     };
 
@@ -27,7 +38,7 @@ define(['rdio-api-proxy'], function(RdioApiProxy) {
         'setAvailableOffline',
         { keys: keys, offline: offline },
         function(data) {
-          callback(data);
+          handleCallback(callback, data);
         });
     };
 
@@ -36,7 +47,7 @@ define(['rdio-api-proxy'], function(RdioApiProxy) {
         'getPlaylists',
         null,
         function(data) {
-          callback(data);
+          handleCallback(callback, data);
         });
     };
 
@@ -45,7 +56,7 @@ define(['rdio-api-proxy'], function(RdioApiProxy) {
         'createPlaylist',
         opt,
         function(data) {
-          callback(data);
+          handleCallback(callback, data);
         });
     };
 
@@ -57,7 +68,7 @@ define(['rdio-api-proxy'], function(RdioApiProxy) {
           tracks: trackKeys
         },
         function(data) {
-          callback(data);
+          handleCallback(callback, data);
         });
     };
   };
